@@ -1,38 +1,128 @@
-.App {
-  text-align: center;
-}
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Zilla+Slab&display=swap');
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+:root{
+  --offset: 64px;
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  body {
+    width: 100%;
+    height: 100%;
+    font-family: "Zilla Slab", serif;
+    font-weight: 700;
+    font-style: normal;;
+    background-color: #1F1F1F;
+    overflow: hidden;
+  }
+  
+  .keys {
+    display: flex;
+    flex-direction: row;
+    gap: 225px;
+  }
+  
+  .keySide {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 24px;
+  }
+  
+  #right {
+    align-items: flex-start;
+  }
+  
+  #right {
+    align-items: flex-end;
+  }
+  
+  .keySide>div {
+    display: flex;
+    flex-direction: row;
+    gap: 64px;
+  }
+  
+  #left.keySide > div:nth-child(2) {
+    margin-left: calc(var(--offset) * 1); /* Calculate the margin based on index */
+  }
+  #left.keySide > div:nth-child(3) {
+    margin-left: calc(var(--offset) * 2); /* Calculate the margin based on index */
+  }
+  
+  #right.keySide > div:nth-child(2) {
+    margin-right: calc(var(--offset) * 1); /* Calculate the margin based on index */
+  }
+  #right.keySide > div:nth-child(3) {
+    margin-right: calc(var(--offset) * 2); /* Calculate the margin based on index */
+  }
+  
+  .letter {
+    font-size: 64px;
+    display: flex;
+    width: 128px;
+    height: 128px;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  input {
+    width: 100%;
+    height: 256px;
+    margin-top: 135px;
+    font-size: 256px;
+    border: none;
+    color: #CE9178;
+    background-color: transparent;
+    caret-color: transparent;
+    text-align: center;
+    outline: none;
+    font-family: "Zilla Slab", serif;
+    font-weight: 700;
+  }
+  
+  h1 {
+    font-size: 325px;
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #DCDCAA;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: bold;
+  }
+
+  .animateKeyLeft{
+    animation: rotateAndScaleLeft 250ms ease-out 0s 1;
+  }
+  .animateKeyRight{
+    animation: rotateAndScaleRight 250ms ease-out 0s 1;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@keyframes rotateAndScaleRight {
+  0% {
+      transform: rotate(0deg) scale(1);
+      background-color: lightgray;
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+      transform: rotate(-10deg) scale(1.5);
+      background-color: #DA70D6;
+  }
+  100% {
+      transform: rotate(0deg) scale(1);
+      background-color: lightgray;
   }
 }
+
+@keyframes rotateAndScaleLeft {
+  0% {
+      transform: rotate(0deg) scale(1);
+      background-color: lightgray;
+  }
+  50% {
+      transform: rotate(10deg) scale(1.5);
+      background-color: #44C1FF;
+  }
+  100% {
+      transform: rotate(0deg) scale(1);
+      background-color: lightgray;
+  }
+}
+
