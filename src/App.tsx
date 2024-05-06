@@ -1,7 +1,6 @@
 import { KeyboardEvent, useCallback, useState } from 'react';
 import './App.css';
 import ColorChangingLetter from './ColorChangingLetter';
-import { wait } from '@testing-library/user-event/dist/utils';
 
 export const typeSpeed = 350;
 export const letterDelay = 0;
@@ -17,14 +16,40 @@ function App() {
   ];
   const [word, setWord] = useState('');
 
-  const delay = (ms: number | undefined) => new Promise(res => setTimeout(res, ms));
-
   const typeWord = useCallback(()=> {
     const letters = word.toLowerCase().split('');
     let currIndex = 0;
+    const ball = document.getElementById('ball');
     const interval = setInterval(()=> {
       if (currIndex < letters.length) {
-        document.getElementById(letters[currIndex])?.click();
+        const currLetter = document.getElementById(letters[currIndex]);
+        const nextLetter = currIndex < letters.length ? document.getElementById(letters[currIndex+1]) : undefined;
+        currLetter?.click();
+        const startTime = Date.now();
+        if (currLetter && nextLetter) {
+          const startPos = {x: (currLetter.getBoundingClientRect().left+currLetter.getBoundingClientRect().right) / 2, y: currLetter.getBoundingClientRect().y-18};
+          const endPos = {x: (nextLetter.getBoundingClientRect().left+nextLetter.getBoundingClientRect().right) / 2, y: nextLetter.getBoundingClientRect().y-18};
+          const animationInterval = setInterval(()=> {
+            const currTime = Date.now() - startTime;
+            const currPosition = interpolateDownwardParabola(startPos, endPos, currTime / typeSpeed );
+            if (!ball?.classList.contains('active')) {
+              ball?.classList.add('active');
+            }
+            if (ball && currPosition) {
+              ball.style.top = `${currPosition.y}px`;
+              ball.style.left = `${currPosition.x}px`;
+            }
+          }, 1000/60);
+          setTimeout(() => {
+            clearInterval(animationInterval);
+            console.log('Interval cleared.');
+          }, typeSpeed); 
+        }
+        else {
+          setTimeout(() => {
+            ball?.classList.remove('active');
+          }, 10);
+        }
         currIndex++;
       }
       else {
@@ -33,7 +58,6 @@ function App() {
     }, typeSpeed);
     setTimeout(() => {
       clearInterval(interval);
-      console.log('Interval cleared.');
     }, typeSpeed*(letters.length+1)); 
   }, [word])
 
@@ -43,8 +67,22 @@ function App() {
     }
   };
 
+  function interpolateDownwardParabola(P1: { x: number; y: number }, P2: { x: number; y: number }, t: number): { x: number; y: number } | undefined {
+    if (t > 1) {
+      return undefined;
+    }
+    // Calculate the interpolated x-coordinate
+    const x = P1.x + t * (P2.x - P1.x);
+
+    // Calculate the interpolated y-coordinate using a cubic curve
+    const y = P1.y + t * t * (3 - 2 * t) * (P2.y - P1.y) - 400 * (1 - t) * t;
+
+    return { x, y };
+}
+
   return (
     <div className="App">
+      <div id="ball"></div>
       <div style={{
         display: 'flex',
         flexDirection: 'column',

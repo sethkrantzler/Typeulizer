@@ -12,6 +12,27 @@
     background-color: #1F1F1F;
     overflow: hidden;
   }
+
+  #ball {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    z-index: 10000;
+    transition-property: scale;
+    transition-timing-function: ease-in;
+    transition-duration: 50ms;
+    scale: 0;
+  }
+
+  .active {
+    scale: 1.5 !important;
+  }
+
+
   
   .keys {
     display: flex;
