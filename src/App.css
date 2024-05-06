@@ -123,7 +123,7 @@
       background-color: lightgray;
   }
   50% {
-      transform: rotate(-10deg) scale(1.5);
+      transform: rotate(-30deg) scale(1.5);
       background-color: #DA70D6;
   }
   100% {
@@ -138,7 +138,7 @@
       background-color: lightgray;
   }
   50% {
-      transform: rotate(10deg) scale(1.5);
+      transform: rotate(30deg) scale(1.5);
       background-color: #44C1FF;
   }
   100% {
