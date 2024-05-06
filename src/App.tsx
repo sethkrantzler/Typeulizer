@@ -56,6 +56,7 @@ function App() {
         return;
       }
     }, typeSpeed);
+    ball?.classList.remove('active');
     setTimeout(() => {
       clearInterval(interval);
     }, typeSpeed*(letters.length+1)); 
