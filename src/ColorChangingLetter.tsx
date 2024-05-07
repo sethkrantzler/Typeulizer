@@ -8,6 +8,15 @@ function ColorChangingLetter(letter: string, side: 'left' | 'right') {
     setTimeout(() => {
         if (divRef.current) {
             divRef.current.classList.add(side === 'left' ? 'animateKeyLeft':'animateKeyRight');
+            const audio = (document.getElementById(`audio${side}`) as HTMLAudioElement);
+            if (audio.paused) {
+              audio.play();
+            } else{
+              audio.pause();
+              audio.currentTime = 0;
+              audio.play();
+            }
+
             setTimeout(() => {
                 divRef.current!.classList.remove(side === 'left' ? 'animateKeyLeft':'animateKeyRight');
             }, 250);

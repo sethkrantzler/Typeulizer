@@ -83,6 +83,8 @@ function App() {
 
   return (
     <div className="App">
+      <audio style={{ display: 'none'}} id="audioleft"><source src="left.wav" type="audio/wav" /></audio>
+      <audio style={{ display: 'none'}} id="audioright"> <source src="right.wav" type="audio/wav" /></audio>
       <div id="ball"></div>
       <div style={{
         display: 'flex',
