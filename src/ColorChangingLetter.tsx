@@ -24,11 +24,11 @@ function ColorChangingLetter(letter: string, side: 'left' | 'right') {
     }, letterDelay);
   }
 
-  const handleKeyPress = (event: KeyboardEvent) => {
-    if (event.key.toUpperCase() === letter.toUpperCase()) {
-        animatePress();
-    }
-  };
+  // const handleKeyPress = (event: KeyboardEvent) => {
+  //   if (event.key.toUpperCase() === letter.toUpperCase()) {
+  //       animatePress();
+  //   }
+  // };
 
   // window.addEventListener('keydown', handleKeyPress);
 

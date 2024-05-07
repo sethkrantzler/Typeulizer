@@ -63,7 +63,7 @@ function App() {
   }, [word])
 
   const handleKeyPress = (event: KeyboardEvent) => {
-    if (event.key == "Enter") {
+    if (event.key === "Enter") {
       typeWord();
     }
   };
